@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="page home-page">
+    <div class="banner">
+        <div class="banner-wrap middle">
+            <div class="banner-image-wrap">
+                <img src="@Url.Content("/images/profile.webp")" class="banner-image" alt="A picture of me" />
+            </div>
+            <header class="banner-details">
+                <h1 class="banner-title">David Timovski</h1>
+                <div class="job-title">.NET Full-Stack Developer</div>
+
+                <p class="contact-detail">Location:</p>
+                <span>Skopje, North Macedonia</span>
+
+                <p class="contact-detail">E-mail:</p>
+                <span>david.timovski@gmail.com</span>
+
+                <div class="site-version">The coin has been flipped.<br />You got the <a href="https://github.com/davidtimovski/website-csharp" target="_blank" rel="noopener">C# version</a> of this website.</div>
+            </header>
+        </div>
+    </div>
+    <section class="grey-section">
+        <div class="social-icons-wrap middle">
+            <div class="social-icons">
+                <a href="https://mk.linkedin.com/in/davidtimovski" class="icon-linkedin" title="LinkedIn" target="_blank" rel="noopener"></a>
+                <a href="https://github.com/davidtimovski" class="icon-github" title="GitHub" target="_blank" rel="noopener"></a>
+                <a href="https://stackoverflow.com/users/1200185/alternatex" class="icon-stack-overflow" title="Stack Overflow" target="_blank" rel="noopener"></a>
+                <a href="https://softwareengineering.stackexchange.com/users/154465/alternatex" class="icon-stack-exchange" title="Software Engineering" target="_blank" rel="noopener"></a>
+                <a href="https://angel.co/david-timovski" class="icon-angellist" title="AngelList" target="_blank" rel="noopener"></a>
+            </div>
+        </div>
+    </section>
+    <section class="grey-section">
+        <div class="middle">
+            <div class="section-content">
+                <div class="intro-title">Hello there!</div>
+                <div class="intro-text">
+                    I'm a .NET Developer (usually) focused on web applications. I love learning and there's always something to learn in this industry. I program at work and then I program at home. All sides of the stack.
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section-title-with-subtitle">
+            <div class="title-part">Expertise</div>
+            <div class="subtitle-part">No need to sift through, just ask.</div>
+        </div>
+        <div class="middle">
+            <div class="section-content">
+                <h3 class="expertise-question">
+                    <span>Do you know</span>
+                    <span class="expertise-question-input-wrap"><input type="text" data-bind="attr: { placeholder: expertisePlaceholder }, textInput: expertiseQuery" /> ?</span>
+                </h3>
+
+                <div data-bind="foreach: foundExpertise, hidden: expertiseNotFound" class="expertise-answers">
+                    <div class="expertise-item">
+                        <div class="expertise">
+                            <img data-bind="attr: { src: imageSrc }" class="expertise-image" />
+                            <div class="expertise-content">
+                                <div class="expertise-title">
+                                    <div class="expertise-tech-wrap">
+                                        <span data-bind="text: tech" class="expertise-tech"></span>
+                                        <div class="expertise-tech-triangle"></div>
+                                    </div>
+                                    <div data-bind="text: answer" class="expertise-answer"></div>
+                                </div>
+                                <div data-bind="html: description" class="expertise-description"></div>
+                            </div>
+                        </div>
+                        <div class="expertise-matched-tags">
+                            <span>Matched: </span>
+                            <span data-bind="foreach: matchedTags">
+                                <span class="expertise-tag" data-bind="text: $data"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-bind="visible: expertiseNotFound" class="expertise-not-found">Sorry, couldn't find anything about that</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section-title">Work experience</div>
+        <div class="middle">
+            <div class="section-content">
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title"><a href="https://perceptivesol.com/">Perceptive Solutions (WoundZoom)</a></div>
+                        <div class="date">August, 2020 - December, 2020</div>
+                    </div>
+                    <div class="tech-list">
+                        <h4>Tech</h4>
+                        <p>
+                            <span class="item">C#</span> , <span class="item">ASP.NET</span>, <span class="item">SQL Server</span>, <span class="item">Entity Framework</span> , <span class="item">Hangfire</span> ,  <span class="item">Azure API for FHIR</span> , <span class="item">JavaScript</span> , <span class="item">AngularJS</span> , <span class="item">Git</span> , <span class="item">Azure DevOps</span>
+                        </p>
+                    </div>
+                    <div class="description">
+                        <p>My first Toptal client. A company that deals with wound imaging, documentation, and analysis. My first task was creating a dashboard with interactive charts that showed a high-level overview of patient and wound data.</p>
+                        <p>Afterwards, I developed a solution that will allow multiple clients with separate databases to use a single hosted instance of the web application (multi-tenancy).</p>
+                        <p>My biggest challenge came last when I worked to integrate the client's application with the <a href="https://hl7.org/FHIR/">HL7 FHIR</a> standard for health care data exchange.</p>
+                    </div>
+                </div>
+                <hr class="section-separator" />
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title"><a href="https://www.nebb.com/">Nebb Solutions</a></div>
+                        <div class="date">January, 2018 - February, 2020</div>
+                    </div>
+                    <div class="tech-list">
+                        <h4>Tech</h4>
+                        <p>
+                            <span class="item">C#</span> , <span class="item">ASP.NET (Core)</span> , <span class="item">WCF</span> , <span class="item">WPF</span> , <span class="item">Entity Framework</span> , <span class="item">Git</span> , <span class="item">Azure DevOps</span> , <span class="item">Scrum</span>
+                        </p>
+                    </div>
+                    <div class="description">
+                        <p>I worked on an enterprise application that deals with network planning for the telecom industry. My job revolved around developing and maintaining Restful APIs that provided additional functionalities and third-party integrations to the main desktop application.</p>
+                        <p>I also spent much of my time developing a collection of internal libraries for efficient packaging and reading of network coverage data.</p>
+                        <p>Our team was distributed (Macedonia/Norway) and Scrum based.</p>
+                    </div>
+                </div>
+                <hr class="section-separator" />
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title"><a href="https://www.opengi.co.uk/">Open GI</a></div>
+                        <div class="date">December, 2016 - December, 2017</div>
+                    </div>
+                    <div class="tech-list">
+                        <h4>Tech</h4>
+                        <p>
+                            <span class="item">C#</span> , <span class="item">ASP.NET</span> , <span class="item">SQL Server</span> , <span class="item">Entity Framework</span> , <span class="item">JavaScript</span> , <span class="item">Durandal.js</span> , <span class="item">Team Foundation Server</span> , <span class="item">Azure DevOps</span> , <span class="item">Scrum</span>
+                        </p>
+                    </div>
+                    <div class="description">
+                        <p>I was a part of a distributed (Macedonian/English) team that worked on a large web application for managing insurance claims. We followed a strict Scrum methodology that helped us remain organized.</p>
+                        <p>My daily work included full-stack development with all of the technologies listed above. We used Visual Studio Team Services to track our progress and we did code reviews to keep the technical debt to a minimum.</p>
+                    </div>
+                </div>
+                <hr class="section-separator" />
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title"><a href="https://www.arthaus.mk/">ArtHaus</a></div>
+                        <div class="date">March, 2014 - December, 2016</div>
+                    </div>
+                    <div class="tech-list">
+                        <h4>Tech</h4>
+                        <p>
+                            <span class="item">C#</span> , <span class="item">ASP.NET MVC</span> , <span class="item">ASP.NET Web Forms</span> , <span class="item">SQL Server</span> , <span class="item">Entity Framework</span> , <span class="item">PHP</span> , <span class="item">Laravel</span> , <span class="item">MySQL</span> , <span class="item">JavaScript</span> , <span class="item">jQuery</span> , <span class="item">Git</span> , <span class="item">Team Foundation Server</span>
+                        </p>
+                    </div>
+                    <div class="description">
+                        <p>Worked on small to medium sized web applications built in PHP/MySQL or ASP.NET MVC/SQL Server. My responsibilities involved both back and front-end, sometimes including design. I worked extensively with CSS, JavaScript and jQuery and I also developed a plugin/theme pair for WordPress.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section-title">Education</div>
+        <div class="middle">
+            <div class="section-content">
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title">European University - Republic of Macedonia</div>
+                        <div class="date">2010 - 2013</div>
+                    </div>
+                    <div class="subtitle">
+                        Bachelor of Software Engineering (B.SE.)
+                    </div>
+                    <div class="description">
+                        <p>I built multiple applications while I was a student and did a ton of essays as additional learning material.</p>
+                        <p>My graduation project was a web application for auctioning written in PHP. The purpose was to explain all of the technologies involved in building a web application, from designing the database to writing the back-end code.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="section-title">Honors & certifications</div>
+        <div class="middle">
+            <div class="section-content">
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title">Professional Scrum Master I</div>
+                        <div class="date">May 2018</div>
+                    </div>
+                    <div class="subtitle">
+                        Scrum.org
+                    </div>
+                    <div class="description">
+                        <p>Earned the certificate by passing the Professional Scrum Master I assessment at <a href="https://www.scrum.org/">Scrum.org</a>. Doing so required a fundamental understanding of the theory behind Scrum as well as ways of applying it in the real world.</p>
+                    </div>
+                    <ul class="links">
+                        <li><a href="~/downloads/PSM I.pdf" title="PSM I.pdf" target="_blank"><i class="icon-file-text" aria-hidden="true"></i>Certificate</a></li>
+                        <li><a href="https://www.scrum.org/user/353345" title="Profile at Scrum.org" target="_blank" rel="noopener"><i class="icon-external-link-square" aria-hidden="true"></i>Profile</a></li>
+                    </ul>
+                </div>
+                <hr class="section-separator" />
+                <div class="section-item">
+                    <div class="title-and-date">
+                        <div class="title">Student scholarship</div>
+                        <div class="date">February 2013</div>
+                    </div>
+                    <div class="subtitle">
+                        Macedonian Ministry of Education and Sciences
+                    </div>
+                    <div class="description">
+                        <p>During my third year of IT studies, I was awarded a student scholarship of type B for students doing bachelor studies. The scholarship was awarded on the basis of an 8.1 grade average.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

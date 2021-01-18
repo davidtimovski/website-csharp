@@ -1,0 +1,48 @@
+﻿@model Website.ViewModels.Blog.PostViewModel
+@{ 
+    ViewBag.Title = Model.Title;
+    ViewBag.ActivePage = "Blog";
+}
+
+<div class="page blog-page">
+    <div class="banner">
+        <div class="banner-wrap middle">
+            <header class="banner-details">
+                <h1 class="banner-title">@ViewBag.Title</h1>
+                <div class="banner-subtitle">@Model.Date</div>
+            </header>
+        </div>
+    </div>
+    <section>
+        <div class="middle">
+            <div class="section-content">
+                <article class="blog-post">
+                    <section class="body">@Html.Raw(Model.Body)</section>
+
+                    @if (Model.PreviousPostId.HasValue || Model.NextPostId.HasValue)
+                    {
+                        <footer>
+                            @if (Model.PreviousPostId.HasValue)
+                            {
+                                <a class="previous" title="Previous" data-bind="attr: { href: previousPostUrl }"><i class="icon-long-arrow-left" aria-hidden="true"></i> @Model.PreviousPostTitle</a>
+                            }
+                            @if (Model.NextPostId.HasValue)
+                            {
+                                <a class="next" title="Next" data-bind="attr: { href: nextPostUrl }">@Model.NextPostTitle <i class="icon-long-arrow-right" aria-hidden="true"></i></a>
+                            }
+                        </footer>
+                    }
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        var previousPostId = '@Model.PreviousPostId';
+        var previousPostTitle = '@Model.PreviousPostTitle';
+        var nextPostId = '@Model.NextPostId';
+        var nextPostTitle = '@Model.NextPostTitle';
+    </script>
+}

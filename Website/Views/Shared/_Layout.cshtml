@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta name="description" content=".NET Full-Stack Developer">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="17RRbP81BHFtIxOvAMrm87BdWATSWAQ3kIcwKzW9ZCw" />
+    <link rel="icon" href="@Url.Content("~/favicon.png")">
+
+    <title>@ViewBag.Title - David Timovski</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik&display=swap">
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/reset.css" />
+        <link rel="stylesheet" href="~/css/responsive.gs.12col.css" />
+        <link rel="stylesheet" href="~/css/icons.css" />
+        <link rel="stylesheet" href="~/css/prism.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    </environment>
+    <environment include="Production">
+        <link rel="preload" href="~/css/style.min.css" as="style" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/style.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <div id="wrap">
+        <main id="content">
+            <header id="header">
+                <nav>
+                    <a href="@Url.ActionLink("Index", "Home")" class="@(ViewBag.Title == "Home" ? "active" : "")">Home</a>
+                    <a href="@Url.ActionLink("Index", "MyProjects")" class="@(ViewBag.Title == "My Projects" ? "active" : "")">My Projects</a>
+                    <a href="@Url.ActionLink("Index", "Blog")" class="@(ViewBag.ActivePage == "Blog" ? "active" : "")">Blog</a>
+                    <a href="@Url.ActionLink("Index", "Bookmarks")" class="@(ViewBag.Title == "Bookmarks" ? "active" : "")">Bookmarks</a>
+                </nav>
+            </header>
+            @RenderBody()
+            <footer id="footer">
+                <div class="middle">
+                    Copyright &copy; @DateTime.Now.Year David Timovski
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    @RenderSection("Scripts", false)
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    
+    <environment include="Development">
+        <script src="~/js/home.js" asp-append-version="true"></script>
+        <script src="~/js/blog.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production">
+        <script src="~/js/scripts.min.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

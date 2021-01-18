@@ -1,0 +1,29 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "bin/Release/net5.0/publish/wwwroot/css/style.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/reset.css",
+      "wwwroot/css/responsive.gs.12col.css",
+      "wwwroot/css/icons.css",
+      "wwwroot/css/prism.css",
+      "wwwroot/css/main.css"
+    ]
+  },
+  {
+    "outputFileName": "bin/Release/net5.0/publish/wwwroot/js/scripts.min.js",
+    "inputFiles": [
+      "wwwroot/js/home.js",
+      "wwwroot/js/blog.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  }
+]

@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Temporal.js";
+}
+
+<div class="page">
+    <div class="banner">
+        <div class="banner-wrap middle">
+            <header class="banner-details">
+                <h1 class="banner-title">@ViewBag.Title</h1>
+                <br />
+                <p>Yet another JavaScript library for handling dates. I am well aware of the existence of <a href="http://momentjs.com/">Moment.js</a>. I did this solely as a learning project and I learned a lot. All things aside though, it's a pretty usable library. It's less than a quarter of the size of Moment.js and it can do pretty much all the things we usually use Moment.js for.</p>
+                <ul class="banner-links">
+                    <li><a href="https://github.com/davidtimovski/temporal" title="Source Code" target="_blank" rel="noopener"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
+                </ul>
+            </header>
+        </div>
+    </div>
+    <section>
+        <div class="section-title">Documentation</div>
+        <div class="middle">
+            <div class="section-content">
+                <div class="section-item">
+                    <p>Calling the <code class="inline-code">temporal()</code> function returns the temporal object with the current time:</p>
+                    <pre><code class="language-javascript">temporal();</code></pre>
+                    <p>The temporal object attempts to parse the value sent to it:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05'); // string
+temporal(1438725600000); // number - as milliseconds
+temporal([2015, 7, 5, 18, 5, 7, 123]); // array - in the order of year, month, day, hour, minute, second, millisecond
+temporal(new Date()); // JavaScript Date
+temporal(temporal()); // another Temporal object</code></pre>
+                    <p>When invoking with a string argument Temporal attempts to parse the date by a number of common formats. Here are some working examples:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05');
+temporal('2015/08/05 18:05');
+temporal('2015-08-05T18:05:07');
+temporal('2015.08.05 18:05:07.123');</code></pre>
+                    <p>If the date string cannot be parsed the exact format should be specified with a second argument like so:</p>
+                    <pre><code class="language-javascript">temporal('04-17-2015 12:25 PM', '[MM]-[dd]-[yyyy] [hh]:[mm] [tt]');</code></pre>
+                    <br />
+                    <h3>Formatting</h3>
+                    <p>An essential function one cannot do without is the format function:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05').format();
+// Thursday, August 05, 2015</code></pre>
+                    <p>The format method accepts a string parameter for specifying the exact format you want your date to appear in:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05:07').format('[dd]/[MM]/[yyyy] [HH]:[mm]:[ss]');
+// 05/08/2015 18:05:07</code></pre>
+                    <p>Here's the full list of available tokens:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05:07.123').format('[y], [yy], [yyy], [yyyy]'); // 5, 15, 015, 2015
+temporal('2015-08-05 18:05:07.123').format('[M], [MM], [MMM], [MMMM]'); // 8, 08, Aug, August
+temporal('2015-08-05 18:05:07.123').format('[d], [dd], [do]'); // 5, 05, 5th
+temporal('2015-08-05 18:05:07.123').format('[H], [HH], [h], [hh]'); // 18, 18, 6, 06
+temporal('2015-08-05 18:05:07.123').format('[m], [mm]'); // 5, 05
+temporal('2015-08-05 18:05:07.123').format('[s], [ss]'); // 7, 07
+temporal('2015-08-05 18:05:07.123').format('[f], [ff], [fff]'); // 1, 12, 123
+temporal('2015-08-05 18:05:07.123').format('[t], [tt]'); // P, PM</code></pre>
+                    <p>Having the tokens in brackets allows for clear separation between tokens and regular text:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05').format('On the [do] of [MMMM] [yyyy] the weather was quite nice');
+// On the 5th of August 2015 the weather was quite nice</code></pre>
+                    <br />
+                    <h3>Querying</h3>
+                    <p>Get any time part:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05:07.123').year(); // 2015
+temporal('2015-08-05 18:05:07.123').month(); // 7
+temporal('2015-08-05 18:05:07.123').day(); // 5
+temporal('2015-08-05 18:05:07.123').hour(); // 18
+temporal('2015-08-05 18:05:07.123').minute(); // 5
+temporal('2015-08-05 18:05:07.123').second(); // 7
+temporal('2015-08-05 18:05:07.123').millisecond(); // 123</code></pre>
+                    <p>Get a relative time string, a common necessity in web applications:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05:07').relativeTimeString();
+// X years, X days, X hour, X minutes and X seconds ago</code></pre>
+                    <p>The same method accepts a parameter to specify the precision (hour, minute or second) with the default precision being in seconds:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05:07').relativeTimeString('hour');
+// X years, X days and X hour ago
+temporal('2015-08-05 18:05:07').relativeTimeString('minute');
+// X years, X days, X hour and X minutes ago</code></pre>
+                    <p>Get other stuff:</p>
+                    <pre><code class="language-javascript">
+temporal().monthName(); // January
+temporal().monthName('short'); // Jan
+temporal().weekdayName(); // Friday
+temporal().weekdayName('short'); // Fri
+temporal().isLeapYear(); // false
+temporal().timeZoneOffset(); -60
+</code></pre>
+                    <br />
+                    <h3>Modification</h3>
+                    <p>Set any time part:</p>
+                    <pre><code class="language-javascript">temporal().years(2015).months(7).days(5).hours(18).minutes(5).seconds(7).milliseconds(123);</code></pre>
+                    <p>Add to any time part:</p>
+                    <pre><code class="language-javascript">temporal().addYears(5);
+temporal().addMonths(1);
+temporal().addWeeks(2);
+temporal().addDays(10);
+temporal().addHours(2);
+temporal().addMinutes(15);
+temporal().addSeconds(10);
+temporal().addMilliseconds(250);</code></pre>
+                    <p>Subtract from any time part:</p>
+                    <pre><code class="language-javascript">temporal().subtractYears(5);
+temporal().subtractMonths(1);
+temporal().subtractWeeks(2);
+temporal().subtractDays(10);
+temporal().subtractHours(2);
+temporal().subtractMinutes(15);
+temporal().subtractSeconds(10);
+temporal().subtractMilliseconds(250);</code></pre>
+                    <p>Advance to tomorrow or go back to yesterday:</p>
+                    <pre><code class="language-javascript">temporal().tomorrow().format('will be the [do]');
+temporal().yesterday().format('was the [do]');</code></pre>
+                    <br />
+                    <h3>Comparison</h3>
+                    <p>To get the difference between two dates:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-12').difference(temporal('2015-08-05')); // 604800000</code></pre>
+                    <p>To check if a date is before or after another date:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-12').isBefore(temporal('2015-08-05')); // false
+temporal('2015-08-12').isAfter(temporal('2015-08-05')); // true</code></pre>
+                    <p>Both of the above methods accept a second parameter to specify the precision (year, month, day, hour, minute, or second) with the default being in milliseconds:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-12').isAfter(temporal('2015-08-05'), 'month'); // false
+temporal('2015-08-12').isAfter(temporal('2015-08-05'), 'day'); // true</code></pre>
+                    <p>Get a person's age by their birthday:</p>
+                    <pre><code class="language-javascript">temporal('1991-08-10').age(); // 29</code></pre>
+                    <br />
+                    <h3>Conversion</h3>
+                    <p>A temporal object can also be converted:</p>
+                    <pre><code class="language-javascript">temporal('2015-08-05 18:05').toJSDate(); // Thu Aug 05 2015 18:05:00 GMT+0200 (Central European Daylight Time)
+temporal('2015-08-05 18:05').toArray(); // [2015, 7, 5, 18, 5, 0, 0]
+temporal('2015-08-05 18:05').toMilliseconds(); // 1438790700000</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

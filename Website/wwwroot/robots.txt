@@ -1,0 +1,3 @@
+﻿User-agent: *
+Disallow:
+Sitemap: https://davidtimovski.com/downloads/Sitemap.xml

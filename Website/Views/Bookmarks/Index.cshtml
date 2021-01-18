@@ -1,0 +1,49 @@
+﻿@using Website.Models
+@model List<Website.ViewModels.Bookmarks.BookmarkViewModel>
+@{
+    ViewBag.Title = "Bookmarks";
+}
+
+<div class="page">
+    <div class="banner">
+        <div class="banner-wrap middle">
+            <header class="banner-details">
+                <h1 class="banner-title">@ViewBag.Title</h1>
+                <br />
+                <p>There's a ton of interesting articles, videos, and tools out there on the web. These are the ones that I felt were worth bookmarking.</p>
+            </header>
+        </div>
+    </div>
+    <section>
+        <div class="middle">
+            <div class="section-content bookmarks">
+                @foreach (var bookmark in Model)
+                {
+                    <a href="@bookmark.Url" target="_blank" rel="noopener">
+                        @switch (bookmark.Type)
+                        {
+                            case BookmarkType.Article:
+                            {
+                                @:<i class="icon-file-text" aria-hidden="true"></i>
+                            }
+                            break;
+                            case BookmarkType.Video:
+                            {
+                                @:<i class="icon-play-circle" aria-hidden="true"></i>
+                            }
+                            break;
+                            case BookmarkType.Tool:
+                            {
+                                @:<i class="icon-briefcase" aria-hidden="true"></i>
+                            }
+                            break;
+                        } @bookmark.Title
+                        <span class="author">@bookmark.Author</span>
+                        <div class="clear"></div>
+                    </a>
+                    <hr />
+                }
+            </div>
+        </div>
+    </section>
+</div>
