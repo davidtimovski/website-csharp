@@ -788,7 +788,7 @@ table {
     }
 
     .social-icons-wrap {
-        display: block;
+        opacity: 1;
     }
 
     .middle {
