@@ -1,5 +1,7 @@
 ﻿@{
     ViewBag.Title = "Sapphire Notes";
+    string appVersion = "0.2.0";
+    string releaseDate = "23-Jan-2021";
 }
 
 <div class="page">
@@ -36,8 +38,8 @@
             <div class="section-content">
                 <div class="section-item">
                     <div class="download-table-title">
-                        <div>Version 0.1.0</div>
-                        <div class="release-date">10-Dec-2020</div>
+                        <div>Version @appVersion</div>
+                        <div class="release-date">@releaseDate</div>
                     </div>
 
                     <table>
@@ -54,7 +56,7 @@
                                 <td>Windows</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_0.1.0_win64_setup.exe">sapphire-notes_0.1.0_win64_setup.exe</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_win64_setup.exe">sapphire-notes_@(appVersion)_win64_setup.exe</a>
                                 </td>
                                 <td>29 MB</td>
                             </tr>
@@ -64,16 +66,16 @@
                                 <td rowspan="2">Debian, Ubuntu</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_0.1.0_amd64.deb">sapphire-notes_0.1.0_amd64.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_amd64.deb">sapphire-notes_@(appVersion)_amd64.deb</a>
                                 </td>
-                                <td>20 MB</td>
+                                <td>18 MB</td>
                             </tr>
                             <tr>
                                 <td>ARM</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_0.1.0_armhf.deb">sapphire-notes_0.1.0_armhf.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_armhf.deb">sapphire-notes_@(appVersion)_armhf.deb</a>
                                 </td>
-                                <td>20 MB</td>
+                                <td>17 MB</td>
                             </tr>
                         </tbody>
                     </table>
