@@ -38,7 +38,6 @@ msbuild.wrn
 
 # My
 **/appsettings.Production.json
-DevOps/
 Website/Controllers/ExpertiseController.cs
 Website/Controllers/TagsController.cs
 Website/Views/Expertise
