@@ -1,7 +1,6 @@
-﻿@{
+﻿@model Website.ViewModels.Home.SapphireNotesViewModel
+@{
     ViewBag.Title = "Sapphire Notes";
-    string appVersion = "0.6.0";
-    string releaseDate = "16-Oct-2021";
 }
 
 <div class="page">
@@ -38,8 +37,8 @@
             <div class="section-content">
                 <div class="section-item">
                     <div class="download-table-title">
-                        <div>Version @appVersion</div>
-                        <div class="release-date">@releaseDate</div>
+                        <div>Version @Model.Version</div>
+                        <div class="release-date">@Model.ReleaseDate</div>
                     </div>
 
                     <table>
@@ -56,9 +55,9 @@
                                 <td>Windows</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_win64_setup.exe">sapphire-notes_@(appVersion)_win64_setup.exe</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_win64_setup.exe">sapphire-notes_@(Model.Version)_win64_setup.exe</a>
                                 </td>
-                                <td>32 MB</td>
+                                <td>@Model.WindowsFileSize</td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -66,16 +65,16 @@
                                 <td rowspan="2">Debian, Ubuntu</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_amd64.deb">sapphire-notes_@(appVersion)_amd64.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_amd64.deb">sapphire-notes_@(Model.Version)_amd64.deb</a>
                                 </td>
-                                <td>20 MB</td>
+                                <td>@Model.DebianUbuntu64FileSize</td>
                             </tr>
                             <tr>
                                 <td>ARM</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(appVersion)_armhf.deb">sapphire-notes_@(appVersion)_armhf.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_armhf.deb">sapphire-notes_@(Model.Version)_armhf.deb</a>
                                 </td>
-                                <td>19 MB</td>
+                                <td>@Model.DebianUbuntuARMFileSize</td>
                             </tr>
                         </tbody>
                     </table>

@@ -7,41 +7,43 @@ using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Website.Models;
 using Website.ViewModels.Expertise;
+using Website.ViewModels.Home;
 
 namespace Website.Controllers
 {
-    [ResponseCache(Duration = 60 * 60 * 24 * 7)]
     public class HomeController : Controller
     {
-        private readonly string _connectionString;
+        private readonly IConfiguration _configuration;
 
         public HomeController(IConfiguration configuration)
         {
-            _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+            _configuration = configuration;
         }
 
-        public ActionResult Index()
+        [ResponseCache(Duration = 60 * 60 * 24 * 7)]
+        public IActionResult Index()
         {
             return View();
         }
 
         [Route("sapphire-notes")]
-        public ActionResult SapphireNotes()
+        public IActionResult SapphireNotes()
         {
-            return View();
+            var viewModel = _configuration.GetSection("SapphireNotes").Get<SapphireNotesViewModel>();
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 60 * 60 * 24 * 7)]
         [HttpGet]
         [Route("api/expertise")]
-        public async Task<IActionResult> GetExpertise()
+        public async Task<JsonResult> GetExpertise()
         {
             string query = @"SELECT e.*, t.""Name""
                             FROM ""Expertise"" AS e
                             INNER JOIN ""ExpertiseTags"" AS et ON e.""Id"" = et.""ExpertiseId""
                             INNER JOIN ""Tags"" AS t ON et.""TagId"" = t.""Id""";
 
-            using DbConnection conn = new NpgsqlConnection(_connectionString);
+            using DbConnection conn = new NpgsqlConnection(_configuration["ConnectionStrings:DefaultConnectionString"]);
             await conn.OpenAsync();
 
             var result = await conn.QueryAsync<ExpertiseDto, Tag, ExpertiseDto>(query, (expertise, tag) =>
