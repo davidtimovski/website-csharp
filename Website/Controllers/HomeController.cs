@@ -33,6 +33,13 @@ namespace Website.Controllers
             return View(viewModel);
         }
 
+        [Route("team-sketch")]
+        public IActionResult TeamSketch()
+        {
+            var viewModel = _configuration.GetSection("TeamSketch").Get<TeamSketchViewModel>();
+            return View(viewModel);
+        }
+
         [ResponseCache(Duration = 60 * 60 * 24 * 7)]
         [HttpGet]
         [Route("api/expertise")]

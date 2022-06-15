@@ -1,6 +1,6 @@
-﻿@model Website.ViewModels.Home.SapphireNotesViewModel
+﻿@model Website.ViewModels.Home.TeamSketchViewModel
 @{
-    ViewBag.Title = "Sapphire Notes";
+    ViewBag.Title = "Team Sketch";
 }
 
 <div class="page">
@@ -9,9 +9,9 @@
             <header class="banner-details">
                 <h1 class="banner-title">@ViewBag.Title</h1>
                 <br />
-                <p>Prettier than Notepad and snappier than Electron alternatives.</p>
+                <p>Share a canvas with your friends or random people.</p>
                 <ul class="banner-links">
-                    <li><a href="https://github.com/davidtimovski/sapphire-notes" title="Source Code" target="_blank" rel="noopener"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
+                    <li><a href="https://github.com/davidtimovski/team-sketch" title="Source Code" target="_blank" rel="noopener"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
                 </ul>
             </header>
         </div>
@@ -21,12 +21,7 @@
         <div class="middle">
             <div class="section-content">
                 <div class="section-item">
-                    <p>Create and manage notes. Wow!</p>
-                    <p>All of them are stored as simple <code class="inline-code">.txt</code> files so if you decide to stop using the app you'll still have your notes in a format you can use anywhere, even on a Mac.</p>
-                    <p>The application auto-saves in frequent intervals and also when closed, so you won't have to do Ctrl/Command+S. You probably still will though because of habit.</p>
-                    <p>Easily archive notes you're currently not using.</p>
-                    <p>Where the notes are stored is your choice. If you want them to be backed up you can simply choose your OneDrive or DropBox folder as the storage location and voilà, cloud backup!</p>
-                    <p>There are many hotkeys and actions that can improve your efficiency in using the app and make you feel like a hax0r. Check them out in Help -> Tips.</p>
+                    <p>Create a room and connect with friends or join a random room and connect with a stranger. Share the canvas and show off your terrible drawing skills.</p>
                 </div>
             </div>
         </div>
@@ -55,7 +50,7 @@
                                 <td>Windows</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_win64_setup.exe">sapphire-notes_@(Model.Version)_win64_setup.exe</a>
+                                    <a href="https://www.davidtimovski.com/downloads/team-sketch/team-sketch_@(Model.Version)_win64_setup.exe">team-sketch_@(Model.Version)_win64_setup.exe</a>
                                 </td>
                                 <td>@Model.WindowsFileSize</td>
                             </tr>
@@ -65,14 +60,14 @@
                                 <td rowspan="2">Debian, Ubuntu</td>
                                 <td>64-bit</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_amd64.deb">sapphire-notes_@(Model.Version)_amd64.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/team-sketch/team-sketch_@(Model.Version)_amd64.deb">team-sketch_@(Model.Version)_amd64.deb</a>
                                 </td>
                                 <td>@Model.DebianUbuntu64FileSize</td>
                             </tr>
                             <tr>
                                 <td>ARM</td>
                                 <td>
-                                    <a href="https://www.davidtimovski.com/downloads/sapphire-notes/sapphire-notes_@(Model.Version)_armhf.deb">sapphire-notes_@(Model.Version)_armhf.deb</a>
+                                    <a href="https://www.davidtimovski.com/downloads/team-sketch/team-sketch_@(Model.Version)_armhf.deb">team-sketch_@(Model.Version)_armhf.deb</a>
                                 </td>
                                 <td>@Model.DebianUbuntuARMFileSize</td>
                             </tr>
