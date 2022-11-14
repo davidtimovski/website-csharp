@@ -3,7 +3,7 @@ Description=DavidTimovski website (C#) running on Ubuntu
 
 [Service]
 WorkingDirectory=/home/davidtimovski/website-csharp
-ExecStart=/usr/bin/dotnet /home/davidtimovski/website-csharp/Website.dll
+ExecStart=/snap/bin/dotnet /home/davidtimovski/website-csharp/Website.dll
 Restart=always
 RestartSec=10  # Restart service after 10 seconds if dotnet service crashes
 SyslogIdentifier=dotnet-website-csharp
