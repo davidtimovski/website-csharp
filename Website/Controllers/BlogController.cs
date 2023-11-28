@@ -7,59 +7,58 @@ using Npgsql;
 using Website.Models;
 using Website.ViewModels.Blog;
 
-namespace Website.Controllers
-{
-    public class BlogController : Controller
-    {
-        private readonly string _connectionString;
+namespace Website.Controllers;
 
-        public BlogController(IConfiguration configuration)
+public class BlogController : Controller
+{
+    private readonly string _connectionString;
+
+    public BlogController(IConfiguration configuration)
+    {
+        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+    }
+
+    public async Task<IActionResult> Index(int? id)
+    {
+        PostViewModel postViewModel;
+
+        string query = @"SELECT * FROM ""Posts"" WHERE ""Status"" = 1 ORDER BY ""DateCreated"" DESC";
+        if (id.HasValue)
         {
-            _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+            query = @"SELECT * FROM ""Posts"" WHERE ""Id"" = @Id AND ""Status"" = 1";
         }
 
-        public async Task<IActionResult> Index(int? id)
+        using DbConnection conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+
+        var post = await conn.QueryFirstOrDefaultAsync<Post>(query, new { Id = id });
+        postViewModel = new PostViewModel
         {
-            PostViewModel postViewModel;
+            Title = post.Title,
+            Body = post.Body,
+            Date = post.DateCreated.ToString("dd MMMM yyyy")
+        };
 
-            string query = @"SELECT * FROM ""Posts"" WHERE ""Status"" = 1 ORDER BY ""DateCreated"" DESC";
-            if (id.HasValue)
-            {
-                query = @"SELECT * FROM ""Posts"" WHERE ""Id"" = @Id AND ""Status"" = 1";
-            }
-
-            using DbConnection conn = new NpgsqlConnection(_connectionString);
-            await conn.OpenAsync();
-
-            var post = await conn.QueryFirstOrDefaultAsync<Post>(query, new { Id = id });
-            postViewModel = new PostViewModel
-            {
-                Title = post.Title,
-                Body = post.Body,
-                Date = post.DateCreated.ToString("dd MMMM yyyy")
-            };
-
-            // Get previous and next posts
-            var previousPost = await conn.QueryFirstOrDefaultAsync<Post>(@"SELECT ""Id"", ""Title"" FROM ""Posts""
+        // Get previous and next posts
+        var previousPost = await conn.QueryFirstOrDefaultAsync<Post>(@"SELECT ""Id"", ""Title"" FROM ""Posts""
                                                                            WHERE ""Status"" = 1 AND ""DateCreated"" < @DateCreated
                                                                            ORDER BY ""DateCreated"" DESC",
-                                                                           new { post.DateCreated });
-            if (previousPost != null)
-            {
-                postViewModel.PreviousPostId = previousPost.Id;
-                postViewModel.PreviousPostTitle = previousPost.Title;
-            }
-            var nextPost = await conn.QueryFirstOrDefaultAsync<Post>(@"SELECT ""Id"", ""Title"" FROM ""Posts""
+                                                                       new { post.DateCreated });
+        if (previousPost != null)
+        {
+            postViewModel.PreviousPostId = previousPost.Id;
+            postViewModel.PreviousPostTitle = previousPost.Title;
+        }
+        var nextPost = await conn.QueryFirstOrDefaultAsync<Post>(@"SELECT ""Id"", ""Title"" FROM ""Posts""
                                                                        WHERE ""Status"" = 1 AND ""DateCreated"" > @DateCreated
                                                                        ORDER BY ""DateCreated""",
-                                                                       new { post.DateCreated });
-            if (nextPost != null)
-            {
-                postViewModel.NextPostId = nextPost.Id;
-                postViewModel.NextPostTitle = nextPost.Title;
-            }
-
-            return View(postViewModel);
+                                                                   new { post.DateCreated });
+        if (nextPost != null)
+        {
+            postViewModel.NextPostId = nextPost.Id;
+            postViewModel.NextPostTitle = nextPost.Title;
         }
+
+        return View(postViewModel);
     }
 }

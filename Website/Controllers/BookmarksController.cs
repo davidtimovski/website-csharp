@@ -8,38 +8,37 @@ using Npgsql;
 using Website.Models;
 using Website.ViewModels.Bookmarks;
 
-namespace Website.Controllers
+namespace Website.Controllers;
+
+[ResponseCache(Duration = 60 * 60 * 24 * 7)]
+public class BookmarksController : Controller
 {
-    [ResponseCache(Duration = 60 * 60 * 24 * 7)]
-    public class BookmarksController : Controller
+    private readonly string _connectionString;
+
+    public BookmarksController(IConfiguration configuration)
     {
-        private readonly string _connectionString;
+        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+    }
 
-        public BookmarksController(IConfiguration configuration)
+    public async Task<IActionResult> Index()
+    {
+        var bookmarkViewModels = new List<BookmarkViewModel>();
+
+        using DbConnection conn = new NpgsqlConnection(_connectionString);
+        await conn.OpenAsync();
+
+        var bookmarks = await conn.QueryAsync<Bookmark>(@"SELECT * FROM ""Bookmarks"" ORDER BY ""Id"" DESC");
+        foreach (var bookmark in bookmarks)
         {
-            _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var bookmarkViewModels = new List<BookmarkViewModel>();
-
-            using DbConnection conn = new NpgsqlConnection(_connectionString);
-            await conn.OpenAsync();
-
-            var bookmarks = await conn.QueryAsync<Bookmark>(@"SELECT * FROM ""Bookmarks"" ORDER BY ""Id"" DESC");
-            foreach (var bookmark in bookmarks)
+            bookmarkViewModels.Add(new BookmarkViewModel
             {
-                bookmarkViewModels.Add(new BookmarkViewModel
-                {
-                    Title = bookmark.Title,
-                    Type = (BookmarkType)bookmark.Type,
-                    Author = bookmark.Author,
-                    Url = bookmark.Url
-                });
-            }
-
-            return View(bookmarkViewModels);
+                Title = bookmark.Title,
+                Type = (BookmarkType)bookmark.Type,
+                Author = bookmark.Author,
+                Url = bookmark.Url
+            });
         }
+
+        return View(bookmarkViewModels);
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace Website.Models
+﻿namespace Website.Models;
+
+public enum BookmarkType
 {
-    public enum BookmarkType
-    {
-        Article,
-        Video,
-        Tool
-    }
+    Article,
+    Video,
+    Tool
 }
