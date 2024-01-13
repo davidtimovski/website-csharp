@@ -2,7 +2,7 @@
 
 namespace Website.Controllers;
 
-[ResponseCache(Duration = 60 * 60 * 24 * 7)]
+[ResponseCache(Duration = Constants.ResponseCacheDuration)]
 [Route("my-projects")]
 public class MyProjectsController : Controller
 {

@@ -1,12 +1,12 @@
 ﻿namespace Website.ViewModels.Blog;
 
-public class PostViewModel
+public sealed class PostViewModel
 {
-    public string Title { get; set; }
-    public string Body { get; set; }
-    public string Date { get; set; }
+    public required string Title { get; init; }
+    public required string Body { get; init; }
+    public required string Date { get; init; }
     public int? PreviousPostId { get; set; }
-    public string PreviousPostTitle { get; set; }
+    public string? PreviousPostTitle { get; set; }
     public int? NextPostId { get; set; }
-    public string NextPostTitle { get; set; }
+    public string? NextPostTitle { get; set; }
 }

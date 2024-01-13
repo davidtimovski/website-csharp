@@ -2,10 +2,10 @@
 
 namespace Website.ViewModels.Bookmarks;
 
-public class BookmarkViewModel
+public sealed class BookmarkViewModel
 {
-    public string Title { get; set; }
-    public BookmarkType Type { get; set; }
-    public string Author { get; set; }
-    public string Url { get; set; }
+    public required string Title { get; init; }
+    public required BookmarkType Type { get; init; }
+    public required string Author { get; init; }
+    public required string Url { get; init; }
 }

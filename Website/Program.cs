@@ -1,17 +1,53 @@
-﻿using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace DavidTimovskiWebsite;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+builder.Services.AddRouting(option =>
 {
-    public static void Main(string[] args)
-    {
-        CreateWebHostBuilder(args).Build().Run();
-    }
+    option.LowercaseUrls = true;
+});
+builder.Services.AddMvc(options =>
+{
+    options.EnableEndpointRouting = false;
+});
+builder.Services.AddResponseCaching();
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .UseUrls("http://localhost:5050");
+builder.WebHost.UseUrls("http://localhost:5050");
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error")
+       .UseResponseCaching();
+}
+
+app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        "Blog with id and slug",
+        "blog/{id}/{slug}",
+        new { controller = "Blog", action = "Index" }
+    );
+    routes.MapRoute(
+        "Blog with id",
+        "blog/{id}",
+        new { controller = "Blog", action = "Index" }
+    );
+
+    routes.MapRoute(
+        name: "default",
+        template: "{controller}/{action}/{id?}",
+        defaults: new { controller = "Home", action = "Index" });
+});
+
+app.Run();

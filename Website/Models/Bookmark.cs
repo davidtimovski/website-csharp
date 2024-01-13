@@ -2,9 +2,9 @@
 
 public class Bookmark
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public byte Type { get; set; }
-    public string Author { get; set; }
-    public string Url { get; set; }
+    public required int Id { get; init; }
+    public required string Title { get; init; }
+    public required byte Type { get; init; }
+    public required string Author { get; init; }
+    public required string Url { get; init; }
 }

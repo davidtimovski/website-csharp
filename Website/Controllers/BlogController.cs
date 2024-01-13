@@ -15,7 +15,7 @@ public class BlogController : Controller
 
     public BlogController(IConfiguration configuration)
     {
-        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
     }
 
     public async Task<IActionResult> Index(int? id)
@@ -31,7 +31,7 @@ public class BlogController : Controller
         using DbConnection conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
 
-        var post = await conn.QueryFirstOrDefaultAsync<Post>(query, new { Id = id });
+        var post = await conn.QueryFirstAsync<Post>(query, new { Id = id });
         postViewModel = new PostViewModel
         {
             Title = post.Title,

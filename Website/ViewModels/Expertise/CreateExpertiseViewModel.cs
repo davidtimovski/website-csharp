@@ -3,7 +3,7 @@ using Website.Models;
 
 namespace Website.ViewModels.Expertise;
 
-public class CreateExpertiseViewModel
+public sealed class CreateExpertiseViewModel
 {
     public CreateExpertiseViewModel() { }
 

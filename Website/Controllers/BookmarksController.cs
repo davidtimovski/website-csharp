@@ -10,14 +10,14 @@ using Website.ViewModels.Bookmarks;
 
 namespace Website.Controllers;
 
-[ResponseCache(Duration = 60 * 60 * 24 * 7)]
+[ResponseCache(Duration = Constants.ResponseCacheDuration)]
 public class BookmarksController : Controller
 {
     private readonly string _connectionString;
 
     public BookmarksController(IConfiguration configuration)
     {
-        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"];
+        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
     }
 
     public async Task<IActionResult> Index()

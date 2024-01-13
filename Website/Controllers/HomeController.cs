@@ -20,7 +20,7 @@ public class HomeController : Controller
         _configuration = configuration;
     }
 
-    [ResponseCache(Duration = 60 * 60 * 24 * 7)]
+    [ResponseCache(Duration = Constants.ResponseCacheDuration)]
     public IActionResult Index()
     {
         return View();
@@ -40,7 +40,7 @@ public class HomeController : Controller
         return View(viewModel);
     }
 
-    [ResponseCache(Duration = 60 * 60 * 24 * 7)]
+    [ResponseCache(Duration = Constants.ResponseCacheDuration)]
     [HttpGet]
     [Route("api/expertise")]
     public async Task<JsonResult> GetExpertise()
@@ -62,7 +62,7 @@ public class HomeController : Controller
         result = result.GroupBy(x => x.Id).Select(group =>
         {
             var combinedExpertise = group.First();
-            combinedExpertise.Tags = group.Select(x => x.Tags.Single()).ToList();
+            combinedExpertise.Tags.AddRange(group.Select(x => x.Tags.Single()));
             return combinedExpertise;
         });
 

@@ -4,10 +4,10 @@ namespace Website.Models;
 
 public class Post
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Body { get; set; }
-    public byte Status { get; set; }
-    public DateTime DateCreated { get; set; }
-    public DateTime DateModified { get; set; }
+    public required int Id { get; init; }
+    public required string Title { get; init; }
+    public required string Body { get; init; }
+    public required byte Status { get; init; }
+    public required DateTime DateCreated { get; init; }
+    public required DateTime DateModified { get; init; }
 }

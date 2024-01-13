@@ -2,31 +2,25 @@
 
 namespace Website.Models;
 
-public class Expertise
+public sealed class Expertise
 {
-    public int Id { get; set; }
-    public string Tech { get; set; }
-    public string Answer { get; set; }
-    public string Description { get; set; }
-    public string ImageUri { get; set; }
+    public required int Id { get; init; }
+    public required string Tech { get; init; }
+    public required string Answer { get; init; }
+    public required string Description { get; init; }
+    public required string ImageUri { get; init; }
 
-    public List<Tag> Tags { get; set; } = new List<Tag>();
+    public required List<Tag> Tags { get; set; } = [];
 }
 
-public class Tag
+public sealed class Tag
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public required int Id { get; init; }
+    public required string Name { get; init; }
 }
 
-public class ExpertiseTag
+public sealed class ExpertiseTag(int expertiseId, int tagId)
 {
-    public ExpertiseTag(int expertiseId, int tagId)
-    {
-        ExpertiseId = expertiseId;
-        TagId = tagId;
-    }
-
-    public int ExpertiseId { get; set; }
-    public int TagId { get; set; }
+    public int ExpertiseId { get; } = expertiseId;
+    public int TagId { get; } = tagId;
 }
