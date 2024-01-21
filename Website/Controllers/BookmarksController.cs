@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -20,7 +19,7 @@ public class BookmarksController(IConfiguration configuration, MetricsService me
 
     public async Task<IActionResult> Index()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/bookmarks"));
+        _metricsService.LogHit("/bookmarks");
 
         using DbConnection conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();

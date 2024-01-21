@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Website.Services;
 
 namespace Website.Controllers;
@@ -12,7 +11,7 @@ public class MyProjectsController(MetricsService metricsService) : Controller
 
     public IActionResult Index()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/my-projects"));
+        _metricsService.LogHit("/my-projects");
 
         return View();
     }
@@ -20,7 +19,7 @@ public class MyProjectsController(MetricsService metricsService) : Controller
     [Route("temporal")]
     public IActionResult Temporal()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/my-projects/temporal"));
+        _metricsService.LogHit("/my-projects/temporal");
 
         return View();
     }

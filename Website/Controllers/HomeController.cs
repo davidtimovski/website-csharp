@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -21,7 +20,7 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
     [ResponseCache(Duration = Constants.ResponseCacheDuration)]
     public IActionResult Index()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/"));
+        _metricsService.LogHit("/");
 
         return View();
     }
@@ -29,7 +28,7 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
     [Route("sapphire-notes")]
     public IActionResult SapphireNotes()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/sapphire-notes"));
+        _metricsService.LogHit("/sapphire-notes");
 
         var viewModel = _configuration.GetSection("SapphireNotes").Get<SapphireNotesViewModel>();
         return View(viewModel);
@@ -38,7 +37,7 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
     [Route("team-sketch")]
     public IActionResult TeamSketch()
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, "/team-sketch"));
+        _metricsService.LogHit("/team-sketch");
 
         var viewModel = _configuration.GetSection("TeamSketch").Get<TeamSketchViewModel>();
         return View(viewModel);

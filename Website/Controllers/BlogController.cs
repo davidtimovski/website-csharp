@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +17,7 @@ public class BlogController(IConfiguration configuration, MetricsService metrics
 
     public async Task<IActionResult> Index(int? id)
     {
-        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, $"/blog/{id}"));
+        _metricsService.LogHit(id is null ? "/blog" : $"/blog/{id}");
 
         PostViewModel postViewModel;
 
