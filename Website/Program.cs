@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Metrics;
+using Website.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<MetricsService>();
 
 builder.Services.AddRouting(option =>
 {
@@ -23,7 +26,8 @@ builder.Services.AddOpenTelemetry()
 
         opt.AddMeter(
             "Microsoft.AspNetCore.Hosting",
-            "Microsoft.AspNetCore.Server.Kestrel");
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "Website");
 
         opt.AddView("http.server.request.duration",
             new ExplicitBucketHistogramConfiguration

@@ -1,25 +1,25 @@
-﻿using System.Data.Common;
+﻿using System.Collections.Generic;
+using System.Data.Common;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Website.Models;
+using Website.Services;
 using Website.ViewModels.Blog;
 
 namespace Website.Controllers;
 
-public class BlogController : Controller
+public class BlogController(IConfiguration configuration, MetricsService metricsService) : Controller
 {
-    private readonly string _connectionString;
-
-    public BlogController(IConfiguration configuration)
-    {
-        _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
-    }
+    private readonly string _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
+    private readonly MetricsService _metricsService = metricsService;
 
     public async Task<IActionResult> Index(int? id)
     {
+        _metricsService.HitsCounter.Add(1, new KeyValuePair<string, object?>(MetricsService.RouteTag, $"/blog/{id}"));
+
         PostViewModel postViewModel;
 
         string query = @"SELECT * FROM ""Posts"" WHERE ""Status"" = 1 ORDER BY ""DateCreated"" DESC";
