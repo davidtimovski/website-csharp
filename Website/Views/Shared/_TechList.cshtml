@@ -1,0 +1,12 @@
+﻿@model List<string>
+@{
+    var spans = Model.Select(x => $@"<span class=""item"">{x}</span>");
+    var output = string.Join(" , ", spans);
+}
+
+<div class="tech-list">
+    <h4>Tech</h4>
+    <p>
+        @Html.Raw(output)
+    </p>
+</div>

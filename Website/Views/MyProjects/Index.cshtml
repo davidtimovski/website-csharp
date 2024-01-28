@@ -23,12 +23,9 @@
                         <div class="date">October, 2019</div>
                     </div>
                     <p class="subtitle">An ecosystem of PWAs</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#/F#</span> , <span class="item">ASP.NET Core</span> , <span class="item">PostgreSQL</span> , <span class="item">Dapper.NET</span> , <span class="item">RabbitMQ</span> , <span class="item">Linux (Ubuntu)</span> , <span class="item">Aurelia</span> , <span class="item">TypeScript</span> , <span class="item">SASS</span> , <span class="item">PWA</span> , <span class="item">IndexedDB</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#/F#", "ASP.NET Core", "PostgreSQL", "Dapper.NET", "RabbitMQ", "SignalR", "SvelteKit", "Aurelia", "TypeScript", "SASS", "PWA", "Sentry" })
+                    
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Wanted to learn more about PWAs and build something powerful enough that I myself will use every day.</p>
@@ -48,12 +45,9 @@
                         <div class="date">October, 2021</div>
                     </div>
                     <p class="subtitle">Track your smoking habits</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">F#</span> , <span class="item">ASP.NET Core</span> , <span class="item">PostgreSQL</span> , <span class="item">Svelte</span> , <span class="item">TypeScript</span> , <span class="item">SASS</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "F#", "ASP.NET Core", "PostgreSQL", "Svelte", "TypeScript", "SASS" })
+
                     <ul class="links">
                         <li><a href="https://smoketracker.davidtimovski.com" title="Check it out" target="_blank" rel="noopener"><i class="icon-external-link-square" aria-hidden="true"></i>smoketracker.davidtimovski.com</a></li>
                         <li><a href="https://github.com/davidtimovski/smoke-tracker" title="Source Code" target="_blank" rel="noopener"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
@@ -68,12 +62,9 @@
                         <div class="date">July, 2021</div>
                     </div>
                     <p class="subtitle">Finally, a metronome that allows you to create and manage multiple tempos</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">TypeScript</span> , <span class="item">Svelte</span> , <span class="item">SASS</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "TypeScript", "Svelte", "SASS" })
+
                     <ul class="links">
                         <li><a href="https://metronome.website" title="Check it out" target="_blank" rel="noopener"><i class="icon-external-link-square" aria-hidden="true"></i>metronome.website</a></li>
                         <li><a href="https://github.com/davidtimovski/metronome" title="Source Code" target="_blank" rel="noopener"><i class="icon-github" aria-hidden="true"></i>GitHub</a></li>
@@ -88,12 +79,9 @@
                         <div class="date">January, 2020</div>
                     </div>
                     <p class="subtitle">A compound interest calculator</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#</span> , <span class="item">Blazor (WebAssembly)</span> , <span class="item">Linux (Ubuntu)</span> , <span class="item">PWA</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#", "Blazor (WASM)", "PWA" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Wanted to see the possibilities that a framework like Blazor (specifically WASM) offers.</p>
@@ -112,12 +100,9 @@
                         <div class="date">March, 2017</div>
                     </div>
                     <p class="subtitle">Take debt and minimize the number of necessary transactions to resolve it</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">Aurelia</span> , <span class="item">JavaScript (ES.Next)</span> , <span class="item">SASS</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "Aurelia", "JavaScript", "SASS" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Built this in order to better familiarize myself with ES.Next and Aurelia (my SPA framework of choice). Also, my first project with SASS. All in all, a great learning experience.</p>
@@ -136,12 +121,9 @@
                         <div class="date">March, 2016</div>
                     </div>
                     <p class="subtitle">Progress-tracking tool for people learning an instrument</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#</span> , <span class="item">ASP.NET MVC</span> , <span class="item">SQL Server</span> , <span class="item">Entity Framework</span> , <span class="item">Knockout.js</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#", "ASP.NET MVC", "SQL Server", "Entity Framework", "Knockout.js" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>I stared building it for convenience since I'm learning the guitar and I like to automate things in my life as much as I can. But as I was working through it I realized how much of a learning experience it could be so I pushed myself into building it with many technologies that I'd been hyping myself to try.</p>
@@ -165,12 +147,9 @@
                         <div class="date">January, 2023</div>
                     </div>
                     <p class="subtitle">A cross-platform desktop application for formatting JSON strings</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#</span> , <span class="item">.NET Core</span> , <span class="item">Avalonia</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#", ".NET 7", "Avalonia UI" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Wanted to play around with text formatting.</p>
@@ -188,12 +167,9 @@
                         <div class="date">June, 2022</div>
                     </div>
                     <p class="subtitle">A cross-platform desktop application for collaborative drawing</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#</span> , <span class="item">JavaScript</span> , <span class="item">.NET Core</span> , <span class="item">Avalonia</span> , <span class="item">SignalR</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#", ".NET 7", "Avalonia UI", "SignalR", "JavaScript" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Wanted to play around with real-time communication but in a more interesting manner than the usual chat app.</p>
@@ -212,12 +188,9 @@
                         <div class="date">November, 2020</div>
                     </div>
                     <p class="subtitle">A cross-platform desktop application for managing notes</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">C#</span> , <span class="item">.NET Core</span> , <span class="item">Avalonia</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "C#", ".NET 6", "Avalonia UI" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Wanted to take a swing at cross-platform desktop dev with this fairly obscure .NET framework <a href="https://avaloniaui.net/">Avalonia</a>.</p>
@@ -241,12 +214,9 @@
                         <div class="date">October, 2017</div>
                     </div>
                     <p class="subtitle">A browser extension for live soccer streams</p>
-                    <div class="tech-list">
-                        <h4>Tech</h4>
-                        <p>
-                            <span class="item">TypeScript</span>
-                        </p>
-                    </div>
+
+                    @await Html.PartialAsync("../Shared/_TechList", new List<string> { "TypeScript" })
+
                     <div class="goal">
                         <h4>Goal</h4>
                         <p>Made this in order to learn about browser extensions. Started building it in JavaScript but it quickly became unmanageable so I took the opportunity to learn TypeScript and I rewrote the whole thing. The difference in readability and maintainability was night and day.</p>
