@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Metrics;
+using Website.Models.Configuration;
 using Website.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,13 @@ builder.Services.AddOpenTelemetry()
     });
 
 builder.WebHost.UseUrls("http://localhost:5050");
+
+builder.Services.Configure<DatabaseOptions>(
+    builder.Configuration.GetSection(DatabaseOptions.Section));
+builder.Services.Configure<TeamSketchOptions>(
+    builder.Configuration.GetSection(TeamSketchOptions.Section));
+builder.Services.Configure<SapphireNotesOptions>(
+    builder.Configuration.GetSection(SapphireNotesOptions.Section));
 
 var app = builder.Build();
 

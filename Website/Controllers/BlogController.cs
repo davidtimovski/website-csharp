@@ -2,18 +2,25 @@
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using Website.Models;
+using Website.Models.Configuration;
 using Website.Services;
 using Website.ViewModels.Blog;
 
 namespace Website.Controllers;
 
-public class BlogController(IConfiguration configuration, MetricsService metricsService) : Controller
+public class BlogController : Controller
 {
-    private readonly string _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
-    private readonly MetricsService _metricsService = metricsService;
+    private readonly string _connectionString;
+    private readonly MetricsService _metricsService;
+
+    public BlogController(IOptions<DatabaseOptions> databaseOptions, MetricsService metricsService)
+    {
+        _connectionString = databaseOptions.Value.DefaultConnectionString;
+        _metricsService = metricsService;
+    }
 
     public async Task<IActionResult> Index(int? id)
     {

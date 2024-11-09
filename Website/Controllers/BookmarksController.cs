@@ -3,19 +3,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using Website.Models;
+using Website.Models.Configuration;
 using Website.Services;
 using Website.ViewModels.Bookmarks;
 
 namespace Website.Controllers;
 
 [ResponseCache(Duration = Constants.ResponseCacheDuration)]
-public class BookmarksController(IConfiguration configuration, MetricsService metricsService) : Controller
+public class BookmarksController : Controller
 {
-    private readonly string _connectionString = configuration["ConnectionStrings:DefaultConnectionString"]!;
-    private readonly MetricsService _metricsService = metricsService;
+    private readonly string _connectionString;
+    private readonly MetricsService _metricsService;
+    
+    public BookmarksController(IOptions<DatabaseOptions> databaseOptions, MetricsService metricsService)
+    {
+        _connectionString = databaseOptions.Value.DefaultConnectionString;
+        _metricsService = metricsService;
+    }
 
     public async Task<IActionResult> Index()
     {

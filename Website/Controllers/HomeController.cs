@@ -3,19 +3,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using Website.Models;
+using Website.Models.Configuration;
 using Website.Services;
 using Website.ViewModels.Expertise;
 using Website.ViewModels.Home;
 
 namespace Website.Controllers;
 
-public class HomeController(IConfiguration configuration, MetricsService metricsService) : Controller
+public class HomeController : Controller
 {
-    private readonly IConfiguration _configuration = configuration;
-    private readonly MetricsService _metricsService = metricsService;
+    private readonly IOptionsMonitor<SapphireNotesOptions> _sapphireNotesOptions;
+    private readonly IOptionsMonitor<TeamSketchOptions> _teamSketchOptions;
+    private readonly string _connectionString;
+    private readonly MetricsService _metricsService;
+
+    public HomeController(
+        IOptionsMonitor<SapphireNotesOptions> sapphireNotesOptions,
+        IOptionsMonitor<TeamSketchOptions> teamSketchOptions,
+        IOptions<DatabaseOptions> databaseOptions,
+        MetricsService metricsService)
+    {
+        _sapphireNotesOptions = sapphireNotesOptions;
+        _teamSketchOptions = teamSketchOptions;
+        _connectionString = databaseOptions.Value.DefaultConnectionString;
+        _metricsService = metricsService;
+    }
 
     [ResponseCache(Duration = Constants.ResponseCacheDuration)]
     public IActionResult Index()
@@ -30,7 +45,16 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
     {
         _metricsService.LogHit("/sapphire-notes");
 
-        var viewModel = _configuration.GetSection("SapphireNotes").Get<SapphireNotesViewModel>();
+        var options = _sapphireNotesOptions.CurrentValue;
+        var viewModel = new SapphireNotesViewModel
+        {
+            Version = options.Version,
+            ReleaseDate = options.ReleaseDate,
+            WindowsFileSize = options.WindowsFileSize,
+            DebianUbuntu64FileSize = options.DebianUbuntu64FileSize,
+            DebianUbuntuARMFileSize = options.DebianUbuntuARMFileSize,
+        };
+
         return View(viewModel);
     }
 
@@ -39,7 +63,16 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
     {
         _metricsService.LogHit("/team-sketch");
 
-        var viewModel = _configuration.GetSection("TeamSketch").Get<TeamSketchViewModel>();
+        var options = _teamSketchOptions.CurrentValue;
+        var viewModel = new TeamSketchViewModel
+        {
+            Version = options.Version,
+            ReleaseDate = options.ReleaseDate,
+            WindowsFileSize = options.WindowsFileSize,
+            DebianUbuntu64FileSize = options.DebianUbuntu64FileSize,
+            DebianUbuntuARMFileSize = options.DebianUbuntuARMFileSize,
+        };
+
         return View(viewModel);
     }
 
@@ -53,7 +86,7 @@ public class HomeController(IConfiguration configuration, MetricsService metrics
                             INNER JOIN ""ExpertiseTags"" AS et ON e.""Id"" = et.""ExpertiseId""
                             INNER JOIN ""Tags"" AS t ON et.""TagId"" = t.""Id""";
 
-        using DbConnection conn = new NpgsqlConnection(_configuration["ConnectionStrings:DefaultConnectionString"]);
+        using DbConnection conn = new NpgsqlConnection(_connectionString);
         await conn.OpenAsync();
 
         var result = await conn.QueryAsync<ExpertiseDto, Tag, ExpertiseDto>(query, (expertise, tag) =>
